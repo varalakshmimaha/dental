@@ -44,34 +44,54 @@
   </section>
 
   <!-- Why Choose Us Section -->
-  <section class="why-sec">
-    <div class="container" style="position:relative;z-index:1">
-      <span class="sec-label reveal" style="color:#5ddfc9">Our Mission</span>
-      <h2 class="sec-title reveal d1" style="color:white">Excellence in Every Smile</h2>
-      <div class="why-grid">
-        <div class="why-card reveal d1">
-          <span class="why-ico">🎓</span>
-          <div class="why-title">Continuous Learning</div>
-          <div class="why-desc">Our doctors regularly attend international conferences and training to stay updated with
-            latest techniques.</div>
+  <section class="why-sec" style="background: var(--cream); padding: 80px 6%;">
+    <div class="container">
+      <span class="section-label reveal">Our Mission</span>
+      <h2 class="section-title reveal d1">Excellence in Every Smile</h2>
+      
+      <div class="about-highlights" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; margin-top: 40px;">
+        <div class="highlight-item reveal d1">
+          <div class="highlight-icon">
+            <img src="{{ asset('images/dentist_checking_patient.png') }}" class="highlight-icon-img" alt="Award trophy clinical icon">
+            <div class="highlight-icon-overlay"></div>
+          </div>
+          <div class="highlight-text">
+            <h4>Award-Winning Clinic</h4>
+            <p>Recognized for excellence in dental care and patient satisfaction by leading associations since 2010.</p>
+          </div>
         </div>
-        <div class="why-card reveal d2">
-          <span class="why-ico">🏆</span>
-          <div class="why-title">Award Winning</div>
-          <div class="why-desc">Recognized for excellence in patient care and innovative dental treatments by leading
-            dental associations.</div>
+
+        <div class="highlight-item reveal d2">
+          <div class="highlight-icon">
+            <img src="{{ asset('images/blog_dental_hygiene.png') }}" class="highlight-icon-img" alt="Expert Specialist portrait">
+            <div class="highlight-icon-overlay"></div>
+          </div>
+          <div class="highlight-text">
+            <h4>Expert Specialists</h4>
+            <p>Led by highly qualified and certified dental professionals with international training and expertise.</p>
+          </div>
         </div>
-        <div class="why-card reveal d3">
-          <span class="why-ico">❤️</span>
-          <div class="why-title">Patient Focused</div>
-          <div class="why-desc">Every decision we make is guided by what's best for your health, comfort, and peace of
-            mind.</div>
+
+        <div class="highlight-item reveal d3">
+          <div class="highlight-icon">
+            <img src="{{ asset('images/blog_implants.png') }}" class="highlight-icon-img" alt="Advanced dental technology icon">
+            <div class="highlight-icon-overlay"></div>
+          </div>
+          <div class="highlight-text">
+            <h4>Latest Technology</h4>
+            <p>Equipped with state-of-the-art diagnostic and treatment technology for precise, pain-free dental care.</p>
+          </div>
         </div>
-        <div class="why-card reveal d4">
-          <span class="why-ico">🌱</span>
-          <div class="why-title">Eco-Friendly</div>
-          <div class="why-desc">Committed to sustainable dental practices and minimizing environmental impact of our
-            clinic.</div>
+
+        <div class="highlight-item reveal d4">
+          <div class="highlight-icon">
+            <img src="{{ asset('images/blog_braces.png') }}" class="highlight-icon-img" alt="Patient-focused care icon">
+            <div class="highlight-icon-overlay"></div>
+          </div>
+          <div class="highlight-text">
+            <h4>Patient Focused</h4>
+            <p>Every decision we make is guided by what's best for your individual health, comfort, and peace of mind.</p>
+          </div>
         </div>
       </div>
     </div>
