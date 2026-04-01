@@ -7,7 +7,28 @@
 <!-- Dynamic Hero Banner Section -->
 <section id="home-banners-section" class="home-banners-section">
   <div id="dental-banners" class="banner-container">
-    <!-- Dynamic banners will be rendered here by dental-data.js -->
+    @if($banners->isNotEmpty())
+        @foreach($banners as $index => $banner)
+            <div class="banner-slide @if($index === 0) active @endif" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.2)), url('{{ asset($banner->image) }}');">
+                <div class="banner-content">
+                    <h2 class="banner-title reveal">{{ $banner->title }}</h2>
+                    <p class="banner-desc reveal">{{ $banner->description }}</p>
+                    <div class="banner-btns reveal">
+                        <a href="{{ route('services') }}" class="btn-primary">View Services &rarr;</a>
+                        <a href="{{ route('contact') }}" class="btn-secondary">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    @else
+        <div class="banner-slide active" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url('{{ asset('images/dentist_checking_patient.png') }}');">
+            <div class="banner-content">
+                <h2 class="banner-title">Premium Dental Care</h2>
+                <p class="banner-desc">Experience world-class treatment in the heart of Bangalore.</p>
+                <a href="{{ route('services') }}" class="btn-primary">Our Services</a>
+            </div>
+        </div>
+    @endif
   </div>
 </section>
 

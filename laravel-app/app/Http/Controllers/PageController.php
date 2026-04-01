@@ -10,7 +10,11 @@ class PageController extends Controller
 {
     public function home()
     {
-        return view('pages.home', ['pageName' => 'home']);
+        $banners = \App\Models\Banner::where('page', 'home')->orderBy('id', 'asc')->get();
+        return view('pages.home', [
+            'pageName' => 'home',
+            'banners' => $banners
+        ]);
     }
 
     public function services()
@@ -45,7 +49,11 @@ class PageController extends Controller
 
     public function gallery()
     {
-        return view('pages.gallery', ['pageName' => 'gallery']);
+        $galleryItems = \App\Models\GalleryItem::orderBy('order', 'asc')->get();
+        return view('pages.gallery', [
+            'pageName' => 'gallery',
+            'galleryItems' => $galleryItems
+        ]);
     }
 
     public function contact()

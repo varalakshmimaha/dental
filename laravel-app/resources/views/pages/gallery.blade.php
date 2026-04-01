@@ -26,65 +26,18 @@
     </div>
 
     <div class="gallery-grid gallery-grid-showcase" id="dental-gallery">
-      <!-- Item 1 -->
-      <article class="gallery-showcase-card reveal d1" data-gallery-category="clinic-interior" tabindex="0">
-        <div class="gallery-showcase-surface tone-1">
-          <img src="{{ asset('images/dentist_checking_patient.png') }}" alt="Reception Area" class="gallery-image-full">
-          <div class="gallery-info-overlay">
-            <h3 class="gallery-showcase-title">Reception &amp; Waiting Area</h3>
-          </div>
-        </div>
-      </article>
-
-      <!-- Item 2 -->
-      <article class="gallery-showcase-card reveal d2" data-gallery-category="equipment" tabindex="0">
-        <div class="gallery-showcase-surface tone-2">
-          <img src="{{ asset('images/dentist_checking_patient.png') }}" alt="Treatment Room" class="gallery-image-full">
-          <div class="gallery-info-overlay">
-            <h3 class="gallery-showcase-title">Treatment Room 1</h3>
-          </div>
-        </div>
-      </article>
-
-      <!-- Item 3 -->
-      <article class="gallery-showcase-card reveal d3" data-gallery-category="equipment" tabindex="0">
-        <div class="gallery-showcase-surface tone-3">
-          <img src="{{ asset('images/blog_dental_hygiene.png') }}" alt="Dental Chair" class="gallery-image-full">
-          <div class="gallery-info-overlay">
-            <h3 class="gallery-showcase-title">Dental Chair &amp; Unit</h3>
-          </div>
-        </div>
-      </article>
-
-      <!-- Item 4 -->
-      <article class="gallery-showcase-card reveal d4" data-gallery-category="clinic-interior" tabindex="0">
-        <div class="gallery-showcase-surface tone-4">
-          <img src="{{ asset('images/blog_implants.png') }}" alt="Lab Corner" class="gallery-image-full">
-          <div class="gallery-info-overlay">
-            <h3 class="gallery-showcase-title">Sterilization &amp; Lab Corner</h3>
-          </div>
-        </div>
-      </article>
-
-      <!-- Item 5 -->
-      <article class="gallery-showcase-card reveal d5" data-gallery-category="before-after" tabindex="0">
-        <div class="gallery-showcase-surface tone-5">
-          <img src="{{ asset('images/blog_invisalign.png') }}" alt="Smile Makeover" class="gallery-image-full">
-          <div class="gallery-info-overlay">
-            <h3 class="gallery-showcase-title">Smile Makeover Result</h3>
-          </div>
-        </div>
-      </article>
-
-      <!-- Item 6 -->
-      <article class="gallery-showcase-card reveal d6" data-gallery-category="before-after" tabindex="0">
-        <div class="gallery-showcase-surface tone-6">
-          <img src="{{ asset('images/blog_braces.png') }}" alt="Braces Transformation" class="gallery-image-full">
-          <div class="gallery-info-overlay">
-            <h3 class="gallery-showcase-title">Braces Transformation</h3>
-          </div>
-        </div>
-      </article>
+      @forelse($galleryItems as $item)
+          <article class="gallery-showcase-card reveal" data-gallery-category="{{ $item->category }}" tabindex="0">
+              <div class="gallery-showcase-surface {{ $item->color_class }}">
+                  <img src="{{ asset($item->image) }}" alt="{{ $item->title }}" class="gallery-image-full">
+                  <div class="gallery-info-overlay">
+                      <h3 class="gallery-showcase-title">{{ $item->title }}</h3>
+                  </div>
+              </div>
+          </article>
+      @empty
+          <div class="no-gallery-items reveal">No gallery items found. Check back soon for new patient transformations!</div>
+      @endforelse
     </div>
   </div>
 </section>
