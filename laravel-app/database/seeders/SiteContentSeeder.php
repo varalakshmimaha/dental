@@ -88,7 +88,21 @@ class SiteContentSeeder extends Seeder
             \App\Models\Service::create(array_merge($service, ['order' => $idx]));
         }
 
-        // 5. Create Admin User
+        // 6. Seed Site Settings
+        \App\Models\SiteSetting::truncate();
+        $settings = [
+            ['key' => 'company_name', 'value' => 'Western Dental & Orthodontics'],
+            ['key' => 'company_email', 'value' => 'info@westerndental.com'],
+            ['key' => 'company_phone', 'value' => '+91 74832 11870'],
+            ['key' => 'company_address', 'value' => 'Tippasandra, Bangalore, Karnataka 560075'],
+            ['key' => 'company_hours', 'value' => 'Mon-Sat: 10:00 AM - 8:00 PM'],
+            ['key' => 'logo_url', 'value' => '/images/about-us-dental.svg'],
+        ];
+        foreach ($settings as $setting) {
+            \App\Models\SiteSetting::updateOrCreate(['key' => $setting['key']], ['value' => $setting['value']]);
+        }
+
+        // 7. Create Admin User
         \App\Models\User::truncate();
         \App\Models\User::create([
             'name' => 'Admin User',

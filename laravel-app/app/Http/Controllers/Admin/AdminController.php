@@ -41,7 +41,7 @@ class AdminController extends Controller
             'title' => 'required|string|max:255',
             'subtitle' => 'nullable|string|max:255',
             'description' => 'required|string',
-            'icon' => 'nullable|string|max:10',
+            'icon' => 'nullable|string|max:255',
             'order' => 'nullable|integer',
         ]);
 
@@ -91,9 +91,10 @@ class AdminController extends Controller
     public function bannersStore(Request $request)
     {
         $validated = $request->validate([
-            'page' => 'required|string|max:255|unique:banners',
+            'page' => 'required|string|max:255',
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'image' => 'nullable|string|max:255',
             'breadcrumb' => 'nullable|string|max:255',
         ]);
 
@@ -111,9 +112,10 @@ class AdminController extends Controller
     {
         $banner = Banner::findOrFail($id);
         $validated = $request->validate([
-            'page' => 'required|string|max:255|unique:banners,page,' . $id,
+            'page' => 'required|string|max:255',
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'image' => 'nullable|string|max:255',
             'breadcrumb' => 'nullable|string|max:255',
         ]);
 
@@ -199,9 +201,10 @@ class AdminController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'icon' => 'nullable|string|max:10',
-            'color_class' => 'required|string|in:gc1,gc2,gc3,gc4,gc5,gc6,gc7,gc8,gc9',
+            'image' => 'nullable|string|max:255',
+            'color_class' => 'required|string',
             'order' => 'nullable|integer',
         ]);
 

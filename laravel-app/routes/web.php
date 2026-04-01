@@ -48,45 +48,49 @@ Route::middleware(['api'])->group(function () {
 
 // Admin Routes
 Route::prefix('admin')->group(function () {
-    Route::get('/login', function () {
-        return file_get_contents(public_path('admin.html'));
-    })->name('admin.login');
+    // Auth Routes
+    Route::get('/login', [App\Http\Controllers\Admin\AdminAuthController::class, 'showLogin'])->name('admin.login');
+    Route::post('/login', [App\Http\Controllers\Admin\AdminAuthController::class, 'login'])->name('admin.login.submit');
+    Route::post('/logout', [App\Http\Controllers\Admin\AdminAuthController::class, 'logout'])->name('admin.logout');
     
-    Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    
-    // Services
-    Route::get('/services', [AdminController::class, 'servicesIndex'])->name('admin.services.index');
-    Route::get('/services/create', [AdminController::class, 'servicesCreate'])->name('admin.services.create');
-    Route::post('/services', [AdminController::class, 'servicesStore'])->name('admin.services.store');
-    Route::get('/services/{id}/edit', [AdminController::class, 'servicesEdit'])->name('admin.services.edit');
-    Route::put('/services/{id}', [AdminController::class, 'servicesUpdate'])->name('admin.services.update');
-    Route::delete('/services/{id}', [AdminController::class, 'servicesDestroy'])->name('admin.services.destroy');
-    
-    // Banners
-    Route::get('/banners', [AdminController::class, 'bannersIndex'])->name('admin.banners.index');
-    Route::get('/banners/create', [AdminController::class, 'bannersCreate'])->name('admin.banners.create');
-    Route::post('/banners', [AdminController::class, 'bannersStore'])->name('admin.banners.store');
-    Route::get('/banners/{id}/edit', [AdminController::class, 'bannersEdit'])->name('admin.banners.edit');
-    Route::put('/banners/{id}', [AdminController::class, 'bannersUpdate'])->name('admin.banners.update');
-    Route::delete('/banners/{id}', [AdminController::class, 'bannersDestroy'])->name('admin.banners.destroy');
-    
-    // Blogs
-    Route::get('/blogs', [AdminController::class, 'blogsIndex'])->name('admin.blogs.index');
-    Route::get('/blogs/create', [AdminController::class, 'blogsCreate'])->name('admin.blogs.create');
-    Route::post('/blogs', [AdminController::class, 'blogsStore'])->name('admin.blogs.store');
-    Route::get('/blogs/{id}/edit', [AdminController::class, 'blogsEdit'])->name('admin.blogs.edit');
-    Route::put('/blogs/{id}', [AdminController::class, 'blogsUpdate'])->name('admin.blogs.update');
-    Route::delete('/blogs/{id}', [AdminController::class, 'blogsDestroy'])->name('admin.blogs.destroy');
-    
-    // Gallery
-    Route::get('/gallery', [AdminController::class, 'galleryIndex'])->name('admin.gallery.index');
-    Route::get('/gallery/create', [AdminController::class, 'galleryCreate'])->name('admin.gallery.create');
-    Route::post('/gallery', [AdminController::class, 'galleryStore'])->name('admin.gallery.store');
-    Route::get('/gallery/{id}/edit', [AdminController::class, 'galleryEdit'])->name('admin.gallery.edit');
-    Route::put('/gallery/{id}', [AdminController::class, 'galleryUpdate'])->name('admin.gallery.update');
-    Route::delete('/gallery/{id}', [AdminController::class, 'galleryDestroy'])->name('admin.gallery.destroy');
-    
-    // Settings
-    Route::get('/settings', [SettingsController::class, 'edit'])->name('admin.settings.edit');
-    Route::put('/settings', [SettingsController::class, 'update'])->name('admin.settings.update');
+    // Protected Admin Routes
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+        
+        // Services
+        Route::get('/services', [AdminController::class, 'servicesIndex'])->name('admin.services.index');
+        Route::get('/services/create', [AdminController::class, 'servicesCreate'])->name('admin.services.create');
+        Route::post('/services', [AdminController::class, 'servicesStore'])->name('admin.services.store');
+        Route::get('/services/{id}/edit', [AdminController::class, 'servicesEdit'])->name('admin.services.edit');
+        Route::put('/services/{id}', [AdminController::class, 'servicesUpdate'])->name('admin.services.update');
+        Route::delete('/services/{id}', [AdminController::class, 'servicesDestroy'])->name('admin.services.destroy');
+        
+        // Banners
+        Route::get('/banners', [AdminController::class, 'bannersIndex'])->name('admin.banners.index');
+        Route::get('/banners/create', [AdminController::class, 'bannersCreate'])->name('admin.banners.create');
+        Route::post('/banners', [AdminController::class, 'bannersStore'])->name('admin.banners.store');
+        Route::get('/banners/{id}/edit', [AdminController::class, 'bannersEdit'])->name('admin.banners.edit');
+        Route::put('/banners/{id}', [AdminController::class, 'bannersUpdate'])->name('admin.banners.update');
+        Route::delete('/banners/{id}', [AdminController::class, 'bannersDestroy'])->name('admin.banners.destroy');
+        
+        // Blogs
+        Route::get('/blogs', [AdminController::class, 'blogsIndex'])->name('admin.blogs.index');
+        Route::get('/blogs/create', [AdminController::class, 'blogsCreate'])->name('admin.blogs.create');
+        Route::post('/blogs', [AdminController::class, 'blogsStore'])->name('admin.blogs.store');
+        Route::get('/blogs/{id}/edit', [AdminController::class, 'blogsEdit'])->name('admin.blogs.edit');
+        Route::put('/blogs/{id}', [AdminController::class, 'blogsUpdate'])->name('admin.blogs.update');
+        Route::delete('/blogs/{id}', [AdminController::class, 'blogsDestroy'])->name('admin.blogs.destroy');
+        
+        // Gallery
+        Route::get('/gallery', [AdminController::class, 'galleryIndex'])->name('admin.gallery.index');
+        Route::get('/gallery/create', [AdminController::class, 'galleryCreate'])->name('admin.gallery.create');
+        Route::post('/gallery', [AdminController::class, 'galleryStore'])->name('admin.gallery.store');
+        Route::get('/gallery/{id}/edit', [AdminController::class, 'galleryEdit'])->name('admin.gallery.edit');
+        Route::put('/gallery/{id}', [AdminController::class, 'galleryUpdate'])->name('admin.gallery.update');
+        Route::delete('/gallery/{id}', [AdminController::class, 'galleryDestroy'])->name('admin.gallery.destroy');
+        
+        // Settings
+        Route::get('/settings', [SettingsController::class, 'edit'])->name('admin.settings.edit');
+        Route::put('/settings', [SettingsController::class, 'update'])->name('admin.settings.update');
+    });
 });
