@@ -74,5 +74,26 @@ class SiteContentSeeder extends Seeder
         foreach ($galleryItems as $idx => $item) {
             \App\Models\GalleryItem::create(array_merge($item, ['order' => $idx]));
         }
+
+        // 4. Seed Services
+        \App\Models\Service::truncate();
+        $services = [
+            ['title' => 'Dental Braces & Aligners', 'subtitle' => 'Orthodontic Treatment', 'description' => 'Straighten your teeth and correct bite issues using advanced metal braces, ceramic braces, or Invisalign clear aligners. Our orthodontic treatments are customised for children, teens, and adults.', 'icon' => '/images/blog_braces.png'],
+            ['title' => 'Dental Implants', 'subtitle' => 'Tooth Replacement', 'description' => 'Dental implants offer a permanent, natural-looking solution for missing teeth. A titanium post is placed in the jawbone acting as an artificial root, topped with a realistic crown.', 'icon' => '/images/blog_implants.png'],
+            ['title' => 'Root Canal Treatment', 'subtitle' => 'Pain-Free Tooth Saving', 'description' => 'Modern root canal treatment is virtually painless with the latest techniques and anaesthesia. We carefully remove the infected pulp, clean the root canals, and seal the tooth to prevent re-infection.', 'icon' => '/images/blog_root_canal.png'],
+            ['title' => 'Smile Designing', 'subtitle' => 'Cosmetic Dentistry', 'description' => 'Transform your smile with a combination of cosmetic procedures tailored to your facial features. Includes teeth whitening, porcelain veneers, bonding, and gum contouring.', 'icon' => '/images/blog_invisalign.png'],
+            ['title' => 'General Dentistry', 'subtitle' => 'Preventive & Routine Care', 'description' => 'Maintaining good oral health starts with regular check-ups and professional cleaning. Our general dentistry services include scaling, polishing, fillings, and tooth extractions.', 'icon' => '/images/dentist_checking_patient.png'],
+        ];
+        foreach ($services as $idx => $service) {
+            \App\Models\Service::create(array_merge($service, ['order' => $idx]));
+        }
+
+        // 5. Create Admin User
+        \App\Models\User::truncate();
+        \App\Models\User::create([
+            'name' => 'Admin User',
+            'email' => 'admin@dental.com',
+            'password' => bcrypt('admin123'),
+        ]);
     }
 }

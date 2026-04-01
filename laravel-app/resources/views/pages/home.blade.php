@@ -155,41 +155,16 @@
     </div>
 
     <div class="services-grid-4">
-      <div class="service-card reveal fade-up d1">
+      @foreach($services as $index => $service)
+      <div class="service-card reveal fade-up d{{ $index + 1 }}">
         <div class="service-icon-bg">
-          <img src="{{ asset('images/blog_braces.png') }}" class="service-icon-img" alt="Braces and Aligners photo thumbnail">
+          <img src="{{ asset($service->icon) }}" class="service-icon-img" alt="{{ $service->title }} photo thumbnail">
           <div class="service-icon-overlay"></div>
         </div>
-        <h3 class="service-title">Braces & Aligners</h3>
-        <p class="service-desc">Advanced orthodontic treatment using metal braces and Invisalign clear aligners for all ages.</p>
+        <h3 class="service-title">{{ $service->title }}</h3>
+        <p class="service-desc">{{ $service->description }}</p>
       </div>
-
-      <div class="service-card reveal fade-up d2">
-        <div class="service-icon-bg">
-          <img src="{{ asset('images/blog_implants.png') }}" class="service-icon-img" alt="Dental implants photo thumbnail">
-          <div class="service-icon-overlay"></div>
-        </div>
-        <h3 class="service-title">Dental Implants</h3>
-        <p class="service-desc">Permanent, natural-looking solution for missing teeth with lasting functional results.</p>
-      </div>
-
-      <div class="service-card reveal fade-up d3">
-        <div class="service-icon-bg">
-          <img src="{{ asset('images/blog_root_canal.png') }}" class="service-icon-img" alt="Root canal treatment photo thumbnail">
-          <div class="service-icon-overlay"></div>
-        </div>
-        <h3 class="service-title">Root Canal Treatment</h3>
-        <p class="service-desc">Pain-free RCT to save damaged teeth and restore complete function with modern techniques.</p>
-      </div>
-
-      <div class="service-card reveal fade-up d4">
-        <div class="service-icon-bg">
-          <img src="{{ asset('images/blog_invisalign.png') }}" class="service-icon-img" alt="Cosmetic dentistry photo thumbnail">
-          <div class="service-icon-overlay"></div>
-        </div>
-        <h3 class="service-title">Cosmetic Dentistry</h3>
-        <p class="service-desc">Smile designing, veneers, and whitening to enhance your natural beauty and confidence.</p>
-      </div>
+      @endforeach
     </div>
 
     <div class="services-cta">

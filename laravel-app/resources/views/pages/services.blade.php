@@ -19,26 +19,22 @@
 <section>
   <div class="container">
     <div class="svc-full-grid">
-      <div class="svc-full-card reveal d1">
-        <div class="svc-full-head"><div class="svc-full-ico">🦷</div><div><h3>Dental Braces & Aligners</h3><div class="sub">Orthodontic Treatment</div></div></div>
-        <div class="svc-full-body"><p>Straighten your teeth and correct bite issues using advanced metal braces, ceramic braces, or Invisalign clear aligners. Our orthodontic treatments are customised for children, teens, and adults. Achieve a perfectly aligned smile with comfort and precision under expert guidance.</p></div>
+      @foreach($services as $index => $service)
+      <div class="svc-full-card reveal d{{ $index + 1 }}">
+        <div class="svc-full-head">
+          <div class="svc-full-ico" style="width: 50px; height: 50px; border-radius: 10px; overflow: hidden; background: var(--teal-pale);">
+            <img src="{{ asset($service->icon) }}" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <div>
+            <h3>{{ $service->title }}</h3>
+            <div class="sub">{{ $service->subtitle }}</div>
+          </div>
+        </div>
+        <div class="svc-full-body">
+          <p>{{ $service->description }}</p>
+        </div>
       </div>
-      <div class="svc-full-card reveal d2">
-        <div class="svc-full-head"><div class="svc-full-ico">🔩</div><div><h3>Dental Implants</h3><div class="sub">Tooth Replacement</div></div></div>
-        <div class="svc-full-body"><p>Dental implants offer a permanent, natural-looking solution for missing teeth. A titanium post is placed in the jawbone acting as an artificial root, topped with a realistic crown. Implants restore full chewing function, prevent bone loss, and blend seamlessly with your natural teeth for decades of confident smiling.</p></div>
-      </div>
-      <div class="svc-full-card reveal d3">
-        <div class="svc-full-head"><div class="svc-full-ico">💊</div><div><h3>Root Canal Treatment</h3><div class="sub">Pain-Free Tooth Saving</div></div></div>
-        <div class="svc-full-body"><p>Modern root canal treatment is virtually painless with the latest techniques and anaesthesia. We carefully remove the infected pulp, clean the root canals, and seal the tooth to prevent re-infection. RCT saves your natural tooth from extraction and relieves the pain caused by deep cavities or dental infections.</p></div>
-      </div>
-      <div class="svc-full-card reveal d4">
-        <div class="svc-full-head"><div class="svc-full-ico">✨</div><div><h3>Smile Designing</h3><div class="sub">Cosmetic Dentistry</div></div></div>
-        <div class="svc-full-body"><p>Transform your smile with a combination of cosmetic procedures tailored to your facial features. Includes teeth whitening, porcelain veneers, bonding, and gum contouring. We create a personalised treatment plan to give you a radiant, camera-ready smile that suits your personality.</p></div>
-      </div>
-      <div class="svc-full-card reveal d5">
-        <div class="svc-full-head"><div class="svc-full-ico">🩺</div><div><h3>General Dentistry</h3><div class="sub">Preventive & Routine Care</div></div></div>
-        <div class="svc-full-body"><p>Maintaining good oral health starts with regular check-ups and professional cleaning. Our general dentistry services include dental examinations, scaling and polishing, fillings, tooth extractions, and fluoride treatments. We focus on early detection and prevention to keep your teeth and gums healthy for life.</p></div>
-      </div>
+      @endforeach
     </div>
   </div>
 </section>
