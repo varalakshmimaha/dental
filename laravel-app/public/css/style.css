@@ -2783,8 +2783,20 @@ footer{
   color: var(--muted);
   line-height: 1.8;
   margin-bottom: 0;
-  min-height: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 108px; /* 4 lines * 1.8 * 15px */
 }
+
+.services-cta {
+  text-align: center;
+  margin-top: 60px;
+}
+
 
 .service-link {
   display: inline-flex;

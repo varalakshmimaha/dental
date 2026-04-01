@@ -11,10 +11,10 @@ class PageController extends Controller
     public function home()
     {
         $banners = \App\Models\Banner::where('page', 'home')->orderBy('id', 'asc')->get();
-        $services = \App\Models\Service::orderBy('order', 'asc')->get();
+        $services = \App\Models\Service::orderBy('order', 'asc')->limit(4)->get();
         return view('pages.home', [
             'pageName' => 'home',
-            'banners' => $banners,
+            'banners'  => $banners,
             'services' => $services
         ]);
     }

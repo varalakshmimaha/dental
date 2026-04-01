@@ -1,17 +1,20 @@
 @extends('layouts.admin')
 
 @section('admin-content')
-<div>
-    <h1 style="color: #0a1628; margin-bottom: 30px; margin-top: 0; font-family: 'Playfair Display';">Settings</h1>
-    
+<div style="max-width: 900px; margin: 0 auto;">
+    <div style="margin-bottom: 40px;">
+        <h1 style="color: var(--navy); margin: 0; font-family: 'Playfair Display', serif; font-size: 32px;">Practice Settings</h1>
+        <p style="color: var(--muted); margin: 5px 0 0 0; font-size: 14px;">Update your clinic's identity, contact details, and brand assets.</p>
+    </div>
+
     @if(session('success'))
-        <div style="background: #c8e6c9; color: #2e7d32; padding: 15px; border-radius: 5px; margin-bottom: 20px; border-left: 4px solid #2e7d32;">
-            {{ session('success') }}
+        <div style="background: #f0fdf4; color: #16a34a; padding: 16px 24px; border-radius: 12px; margin-bottom: 30px; border: 1px solid #dcfce7; display: flex; align-items: center; gap: 12px; font-weight: 500;">
+            <span>✅</span> {{ session('success') }}
         </div>
     @endif
 
     @if($errors->any())
-        <div style="background: #ffebee; color: #c62828; padding: 15px; border-radius: 5px; margin-bottom: 20px; border-left: 4px solid #c62828;">
+        <div style="background: #fef2f2; color: #ef4444; padding: 16px 24px; border-radius: 12px; margin-bottom: 30px; border: 1px solid #fee2e2; font-weight: 500;">
             <ul style="margin: 0; padding-left: 20px;">
                 @foreach($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -19,62 +22,85 @@
             </ul>
         </div>
     @endif
-    
-    <form action="{{ route('admin.settings.update') }}" method="POST" enctype="multipart/form-data" style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); max-width: 700px;">
+
+    <form action="{{ route('admin.settings.update') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-        
-        <!-- Logo Section -->
-        <div style="margin-bottom: 30px; padding-bottom: 30px; border-bottom: 2px solid #f0f0f0;">
-            <h2 style="color: #0a1628; margin-top: 0; margin-bottom: 20px; font-size: 18px;">Logo</h2>
-            
+
+        {{-- Logo Section --}}
+        <div style="background: white; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.02); border: 1px solid rgba(0,0,0,0.05); padding: 40px; margin-bottom: 24px;">
+            <h2 style="color: var(--navy); margin: 0 0 8px 0; font-size: 20px; font-weight: 700;">Brand Logo</h2>
+            <p style="color: var(--muted); margin: 0 0 28px 0; font-size: 14px;">Upload your clinic logo (JPEG, PNG, max 2MB).</p>
+
             @if(isset($settings['logo_path']) && $settings['logo_path'])
-                <div style="margin-bottom: 15px;">
-                    <p style="color: #666; font-size: 13px; margin-bottom: 10px;">Current Logo:</p>
-                    <img src="{{ asset('storage/' . $settings['logo_path']) }}" alt="Current Logo" style="max-width: 150px; height: auto; border-radius: 5px;">
+                <div style="margin-bottom: 20px; padding: 16px; background: #fafcfe; border-radius: 12px; border: 1px solid rgba(0,0,0,0.05); display: inline-block;">
+                    <p style="color: var(--muted); font-size: 12px; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">Current Logo</p>
+                    <img src="{{ asset('storage/' . $settings['logo_path']) }}" alt="Logo" style="max-width: 160px; height: auto; display: block;">
                 </div>
             @endif
-            
-            <div style="margin-bottom: 20px;">
-                <label for="logo" style="display: block; color: #0a1628; font-weight: 600; margin-bottom: 8px;">Upload Logo</label>
-                <input type="file" id="logo" name="logo" accept="image/*" style="padding: 10px; border: 2px dashed #18b4d4; border-radius: 5px; width: 100%; box-sizing: border-box;">
-                <p style="color: #999; font-size: 12px; margin-top: 5px;">Max 2MB. Formats: JPEG, PNG, JPG, GIF</p>
+
+            <div>
+                <label for="logo" style="display: block; color: var(--navy); font-weight: 700; margin-bottom: 8px; font-size: 14px;">Upload New Logo</label>
+                <input type="file" id="logo" name="logo" accept="image/*"
+                    style="display: block; width: 100%; padding: 14px; border: 2px dashed var(--teal); border-radius: 12px; font-family: 'Outfit', sans-serif; font-size: 14px; background: rgba(125,211,252,0.04); box-sizing: border-box; cursor: pointer;">
             </div>
         </div>
-        
-        <!-- Company Information Section -->
-        <div style="margin-bottom: 30px;">
-            <h2 style="color: #0a1628; margin-top: 0; margin-bottom: 20px; font-size: 18px;">Company Information</h2>
-            
-            <div style="margin-bottom: 20px;">
-                <label for="company_name" style="display: block; color: #0a1628; font-weight: 600; margin-bottom: 8px;">Company Name</label>
-                <input type="text" id="company_name" name="company_name" value="{{ old('company_name', $settings['company_name'] ?? '') }}" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 14px; box-sizing: border-box;">
+
+        {{-- Clinic Information --}}
+        <div style="background: white; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.02); border: 1px solid rgba(0,0,0,0.05); padding: 40px; margin-bottom: 24px;">
+            <h2 style="color: var(--navy); margin: 0 0 8px 0; font-size: 20px; font-weight: 700;">Clinic Information</h2>
+            <p style="color: var(--muted); margin: 0 0 28px 0; font-size: 14px;">This information appears across the public site — footer, contact page, and more.</p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <label for="company_name" style="display: block; color: var(--navy); font-weight: 700; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Clinic Name</label>
+                    <input type="text" id="company_name" name="company_name"
+                        value="{{ old('company_name', $settings['company_name'] ?? '') }}"
+                        style="width: 100%; padding: 14px 16px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 12px; font-family: 'Outfit'; font-size: 15px; box-sizing: border-box; transition: border-color 0.2s;"
+                        onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">
+                </div>
+                <div>
+                    <label for="company_email" style="display: block; color: var(--navy); font-weight: 700; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Email Address</label>
+                    <input type="email" id="company_email" name="company_email"
+                        value="{{ old('company_email', $settings['company_email'] ?? '') }}"
+                        style="width: 100%; padding: 14px 16px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 12px; font-family: 'Outfit'; font-size: 15px; box-sizing: border-box; transition: border-color 0.2s;"
+                        onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">
+                </div>
+                <div>
+                    <label for="company_phone" style="display: block; color: var(--navy); font-weight: 700; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Phone Number</label>
+                    <input type="text" id="company_phone" name="company_phone"
+                        value="{{ old('company_phone', $settings['company_phone'] ?? '') }}"
+                        style="width: 100%; padding: 14px 16px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 12px; font-family: 'Outfit'; font-size: 15px; box-sizing: border-box; transition: border-color 0.2s;"
+                        onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">
+                </div>
+                <div>
+                    <label for="company_hours" style="display: block; color: var(--navy); font-weight: 700; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Business Hours</label>
+                    <input type="text" id="company_hours" name="company_hours"
+                        value="{{ old('company_hours', $settings['company_hours'] ?? '') }}"
+                        placeholder="e.g., Mon-Sat: 10AM - 8PM"
+                        style="width: 100%; padding: 14px 16px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 12px; font-family: 'Outfit'; font-size: 15px; box-sizing: border-box; transition: border-color 0.2s;"
+                        onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">
+                </div>
             </div>
-            
-            <div style="margin-bottom: 20px;">
-                <label for="company_email" style="display: block; color: #0a1628; font-weight: 600; margin-bottom: 8px;">Email Address</label>
-                <input type="email" id="company_email" name="company_email" value="{{ old('company_email', $settings['company_email'] ?? '') }}" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 14px; box-sizing: border-box;">
-            </div>
-            
-            <div style="margin-bottom: 20px;">
-                <label for="company_phone" style="display: block; color: #0a1628; font-weight: 600; margin-bottom: 8px;">Phone Number</label>
-                <input type="text" id="company_phone" name="company_phone" value="{{ old('company_phone', $settings['company_phone'] ?? '') }}" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 14px; box-sizing: border-box;">
-            </div>
-            
-            <div style="margin-bottom: 20px;">
-                <label for="company_address" style="display: block; color: #0a1628; font-weight: 600; margin-bottom: 8px;">Address</label>
-                <textarea id="company_address" name="company_address" rows="3" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 14px; box-sizing: border-box; resize: vertical;">{{ old('company_address', $settings['company_address'] ?? '') }}</textarea>
-            </div>
-            
-            <div style="margin-bottom: 30px;">
-                <label for="company_hours" style="display: block; color: #0a1628; font-weight: 600; margin-bottom: 8px;">Business Hours</label>
-                <textarea id="company_hours" name="company_hours" rows="3" placeholder="e.g., Mon-Fri: 9:00 AM - 6:00 PM&#10;Sat: 10:00 AM - 4:00 PM&#10;Sun: Closed" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 14px; box-sizing: border-box; resize: vertical;">{{ old('company_hours', $settings['company_hours'] ?? '') }}</textarea>
+            <div style="margin-top: 20px;">
+                <label for="company_address" style="display: block; color: var(--navy); font-weight: 700; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Full Address</label>
+                <textarea id="company_address" name="company_address" rows="2"
+                    style="width: 100%; padding: 14px 16px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 12px; font-family: 'Outfit'; font-size: 15px; box-sizing: border-box; resize: vertical; transition: border-color 0.2s;"
+                    onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">{{ old('company_address', $settings['company_address'] ?? '') }}</textarea>
             </div>
         </div>
-        
-        <div style="display: flex; gap: 10px;">
-            <button type="submit" style="background: #18b4d4; color: white; padding: 12px 30px; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; font-size: 14px;">Save Settings</button>
-            <a href="{{ route('admin.dashboard') }}" style="background: #ccc; color: #333; padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: 600; font-size: 14px;">Cancel</a>
+
+        {{-- Actions --}}
+        <div style="display: flex; gap: 12px; align-items: center;">
+            <button type="submit"
+                style="background: var(--teal); color: white; padding: 16px 36px; border: none; border-radius: 14px; cursor: pointer; font-weight: 700; font-size: 15px; font-family: 'Outfit'; box-shadow: 0 10px 25px rgba(125,211,252,0.4); transition: transform 0.2s;"
+                onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
+                Save Changes
+            </button>
+            <a href="{{ route('admin.dashboard') }}"
+                style="padding: 16px 28px; border-radius: 14px; text-decoration: none; font-weight: 600; font-size: 15px; color: var(--muted); background: rgba(0,0,0,0.04);">
+                Cancel
+            </a>
         </div>
     </form>
 </div>
