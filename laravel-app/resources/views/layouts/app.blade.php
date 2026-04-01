@@ -30,6 +30,7 @@
     </a>
     <ul class="nav-links">
       <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
+      <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About Us</a></li>
       <li><a href="{{ route('services') }}" class="{{ request()->routeIs('services') ? 'active' : '' }}">Services</a></li>
       <li><a href="{{ route('blog') }}" class="{{ request()->routeIs('blog', 'blog.show') ? 'active' : '' }}">Blog</a></li>
       <li><a href="{{ route('gallery') }}" class="{{ request()->routeIs('gallery') ? 'active' : '' }}">Gallery</a></li>
@@ -46,6 +47,7 @@
 <!-- Mobile Menu -->
 <div class="mob-menu" id="mobMenu">
   <a href="{{ route('home') }}">Home</a>
+  <a href="{{ route('about') }}">About Us</a>
   <a href="{{ route('services') }}">Services</a>
   <a href="{{ route('blog') }}">Blog</a>
   <a href="{{ route('gallery') }}">Gallery</a>

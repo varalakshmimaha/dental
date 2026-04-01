@@ -2021,10 +2021,10 @@ footer{
   border-color:rgba(24,180,212,.35);
 }
 .gallery-filter.is-active{
-  background:linear-gradient(135deg,#159987 0%,#12b4a5 100%);
+  background:var(--grad-teal);
   border-color:transparent;
   color:white;
-  box-shadow:0 16px 30px rgba(18,180,165,.22);
+  box-shadow:0 16px 30px rgba(56,189,248,.3);
 }
 .gallery-grid-showcase{
   margin-top:40px;
