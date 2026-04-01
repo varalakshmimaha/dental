@@ -15,7 +15,7 @@
       <span class="breadcrumb-current">Blog</span>
     </nav>
     <h1 style="text-shadow: 0 4px 12px rgba(0,0,0,0.3);">Dental Care Insights</h1>
-    <p style="color: rgba(255,255,255,0.9); font-size: 18px; max-width: 600px;">Expert insights on oral health, treatment options, and smile care tips from our dental specialists.</p>
+    <p style="color: rgba(255,255,255,0.9); font-size: 18px; max-width: 600px;">Expert insights and professional maintenance tips to keep your smile healthy, bright, and stunning for years to come.</p>
   </div>
 </div>
 

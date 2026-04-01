@@ -50,13 +50,13 @@
   <div class="mob-menu-header">
     <a href="{{ route('home') }}" class="mob-menu-brand">
       @if(!empty($siteSettings['logo_url']))
-        <img src="{{ $siteSettings['logo_url'] }}" alt="{{ $siteSettings['company_name'] }} logo" style="height:36px;width:auto;object-fit:contain;">
+        <img src="{{ $siteSettings['logo_url'] }}" alt="{{ $siteSettings['company_name'] }} logo" style="height:44px;width:auto;object-fit:contain;">
       @else
         <div class="mob-menu-brand-icon">🏥</div>
       @endif
-      <div>
+      <div class="mob-menu-brand-text">
         <span class="mob-menu-brand-name">{{ $siteSettings['company_name'] }}</span>
-        <span class="mob-menu-brand-tag">Orthodontics</span>
+        <span class="mob-menu-brand-tag">ORTHODONTICS & FAMILY DENTAL</span>
       </div>
     </a>
     <button class="mob-menu-close" id="mobMenuClose" aria-label="Close navigation menu">&#10005;</button>
@@ -65,32 +65,26 @@
   <!-- Nav Links -->
   <div class="mob-menu-links">
     <a href="{{ route('home') }}" class="mob-menu-link {{ request()->routeIs('home') ? 'mob-menu-link--active' : '' }}">
-      <span class="mob-menu-link-icon">🏠</span>
       <span>Home</span>
       <span class="mob-menu-link-arrow">›</span>
     </a>
     <a href="{{ route('about') }}" class="mob-menu-link {{ request()->routeIs('about') ? 'mob-menu-link--active' : '' }}">
-      <span class="mob-menu-link-icon">ℹ️</span>
       <span>About Us</span>
       <span class="mob-menu-link-arrow">›</span>
     </a>
     <a href="{{ route('services') }}" class="mob-menu-link {{ request()->routeIs('services') ? 'mob-menu-link--active' : '' }}">
-      <span class="mob-menu-link-icon">🦷</span>
       <span>Services</span>
       <span class="mob-menu-link-arrow">›</span>
     </a>
     <a href="{{ route('blog') }}" class="mob-menu-link {{ request()->routeIs('blog','blog.show') ? 'mob-menu-link--active' : '' }}">
-      <span class="mob-menu-link-icon">📝</span>
       <span>Blog</span>
       <span class="mob-menu-link-arrow">›</span>
     </a>
     <a href="{{ route('gallery') }}" class="mob-menu-link {{ request()->routeIs('gallery') ? 'mob-menu-link--active' : '' }}">
-      <span class="mob-menu-link-icon">🖼️</span>
       <span>Gallery</span>
       <span class="mob-menu-link-arrow">›</span>
     </a>
     <a href="{{ route('contact') }}" class="mob-menu-link {{ request()->routeIs('contact') ? 'mob-menu-link--active' : '' }}">
-      <span class="mob-menu-link-icon">📍</span>
       <span>Contact</span>
       <span class="mob-menu-link-arrow">›</span>
     </a>
