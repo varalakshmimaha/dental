@@ -149,14 +149,21 @@ document.addEventListener('DOMContentLoaded', () => {
             // Filter cards
             cards.forEach(card => {
                 const category = card.getAttribute('data-gallery-category');
+                
                 if (filter === 'all' || category === filter) {
                     card.style.display = 'block';
                     setTimeout(() => {
+                        card.classList.add('is-visible');
                         card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, 50);
+                        card.style.visibility = 'visible';
+                        card.style.transform = 'translateY(0) scale(1)';
+                    }, 20);
                 } else {
                     card.style.display = 'none';
+                    card.classList.remove('is-visible');
+                    card.style.opacity = '0';
+                    card.style.visibility = 'hidden';
+                    card.style.transform = 'translateY(20px) scale(0.95)';
                 }
             });
         });
